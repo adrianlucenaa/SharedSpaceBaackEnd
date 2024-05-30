@@ -13,13 +13,13 @@ public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name = "address")
     private String address;
 
     @Column(name = "numberowner")
-    private Integer numberowner;
+    private int numberowner;
 
     @Column(name = "owneremail")
     private String owneremail;
@@ -52,11 +52,11 @@ public class Apartment {
         this.img = img;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -72,7 +72,7 @@ public class Apartment {
         return numberowner;
     }
 
-    public void setNumberowner(Integer numberowner) {
+    public void setNumberowner(int numberowner) {
         this.numberowner = numberowner;
     }
 

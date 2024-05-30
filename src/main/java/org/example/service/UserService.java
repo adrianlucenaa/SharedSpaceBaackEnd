@@ -54,6 +54,7 @@ public class UserService {
                 fromDB.setEmail(user.getEmail());
                 fromDB.setDni(user.getDni());
                 fromDB.setPassword(user.getPassword());
+                fromDB.setApartmentId(user.getApartmentId());
                 end=repo.save(fromDB);
             }else{
                 throw new RecordNotFoundException("No user found with id: " + user.getId());

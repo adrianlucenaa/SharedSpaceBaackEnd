@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name = "name")
     private String name;
@@ -47,17 +47,17 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String surname, String email, String password, String dni, Apartment apartment) {
+    public User(int id, String name, String surname, String email, String password, String dni, int  apartmentId) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.dni = dni;
-        this.apartment = apartment;
+        this.apartment.setId(apartmentId);
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -105,6 +105,19 @@ public class User {
         this.dni = dni;
     }
 
+    public int getApartmentId() {
+        this.apartment.getId();
+        return apartment.getId();
+    }
+
+    public int setApartmentId(int apartmentId) {
+        this.apartment = new Apartment();
+        this.apartment.setId(apartmentId);
+        return apartment.getId();
+    }
+
+    /*
+
     public Apartment getApartment() {
         return apartment;
     }
@@ -112,6 +125,7 @@ public class User {
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
+    */
 
     @Override
     public String toString() {
@@ -122,7 +136,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", dni='" + dni + '\'' +
-                ", apartment=" + apartment +
+                ", apartmentId=" + apartment +
                 '}';
     }
 }
