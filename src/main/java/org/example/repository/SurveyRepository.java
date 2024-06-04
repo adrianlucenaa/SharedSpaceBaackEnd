@@ -1,3 +1,7 @@
+
+/*
+
+
 package org.example.repository;
 
 import org.example.Models.Survey;
@@ -14,3 +18,4 @@ public interface SurveyRepository extends JpaRepository<Survey, Integer> {
     @Query(value = "SELECT * FROM survey WHERE id_apartment = ?1", nativeQuery = true)
     List<Survey> getSurveyByApartmentId(int id);
 }
+*/

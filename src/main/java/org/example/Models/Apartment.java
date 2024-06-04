@@ -13,6 +13,7 @@ public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "address")
@@ -38,6 +39,9 @@ public class Apartment {
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Task> tasks;
+
+    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    private List<Survey> surveys;
 
     public Apartment() {
     }
@@ -100,6 +104,33 @@ public class Apartment {
 
     public void setImg(String img) { this.img = img; }
 
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+
+    public List<Survey> getSurveys() {
+        return surveys;
+    }
+
+
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
+    }
+
     @Override
     public String toString() {
         return "Apartment{" +
@@ -109,7 +140,7 @@ public class Apartment {
                 ", owneremail='" + owneremail + '\'' +
                 ", nameowner='" + nameowner + '\'' +
                 ", name='" + name + '\'' +
-                ", img='" + img + '\'' +
+
                 '}';
     }
 }

@@ -1,3 +1,7 @@
+
+
+
+/*
 package org.example.service;
 
 
@@ -32,44 +36,27 @@ public class SurveyService {
             System.out.println("No se encontró la encuesta");
         }
     }
-/*
 
-    public Survey createSurvey(Survey survey) {
-        Survey result;
-        if (survey.getId() != 0) {
-            result = repository.save(survey);
-        } else {
-            //Optional<Survey> surveyOptional = SurveyRepository.findById(survey.getId());
-            Optional<Survey> surveyOptional = repository.findById(survey.getId());
-            if (surveyOptional.isPresent()) {
-                Survey fromDB = surveyOptional.get();
-                fromDB.setDescription(survey.getDescription());
-                fromDB.setOptions(survey.getOptions());
-                fromDB.setSolution(survey.getSolution());
-                fromDB.setUserId(survey.getUserId());
-                fromDB.setApartmentId(survey.getApartmentId());
-                result = repository.save(fromDB);
-            } else {
-                result = repository.save(survey);
-            }
-        }
-        return result;
-    }
-*/
 
 
     //Logica para crear o actualizar una tarea
     public Survey createSurvey(Survey survey) {
         Survey result;
+        System.out.println(survey);
         if (survey.getId() != 0) {
             Optional<Survey> resultOptional = surveyRepository.findById(survey.getId());
             if (resultOptional.isPresent()) {
+                //Imprimir por pantalla el survey
+                System.out.println(survey);
                 Survey fromDB = resultOptional.get();
                 fromDB.setDescription(survey.getDescription());
                 fromDB.setOptions(survey.getOptions());
                 fromDB.setSolution(survey.getSolution());
-                fromDB.setApartmentId(survey.getApartmentId());
+                if(survey.getApartment()!=null){
+                    fromDB.setApartment(survey.getApartment());
+                }
                 result = surveyRepository.save(fromDB);
+                return result;
             } else {
                 throw new RecordNotFoundException("No task found with id: " + survey.getId());
             }
@@ -79,6 +66,7 @@ public class SurveyService {
         return result;
     }
 
-
-
 }
+
+*/
+

@@ -22,6 +22,18 @@ public class UserService {
         return users;
     }
 
+    public List<User> getAllUsersByPage(int page){
+
+        //si la pagina noes valida
+        if(page < 1){
+            page = 1;
+        }
+        page--;
+        page*=10;
+        List<User> users =  repo.findAllByPage(page);
+        return users;
+    }
+
     public User login(String usernameOrEmail, String password) {
         // Busca el usuario por su nombre de usuario o correo electrónico
         User user = repo.findByUsernameOrEmail(usernameOrEmail);
@@ -54,7 +66,10 @@ public class UserService {
                 fromDB.setEmail(user.getEmail());
                 fromDB.setDni(user.getDni());
                 fromDB.setPassword(user.getPassword());
-                fromDB.setApartmentId(user.getApartmentId());
+                if(user.getApartment()!=null){
+                    fromDB.setApartment(user.getApartment());
+                }
+                //fromDB.setApartmentId(user.getApartmentId());
                 end=repo.save(fromDB);
             }else{
                 throw new RecordNotFoundException("No user found with id: " + user.getId());

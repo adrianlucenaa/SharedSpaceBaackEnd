@@ -26,6 +26,13 @@ public class UserController {
         return ResponseEntity.ok(users);
 
     }
+    @GetMapping("/page/{page}")
+    public ResponseEntity<List<User>> getAllUsersByPage(@PathVariable("page") int page){
+        List<User> users = service.getAllUsersByPage(page);
+
+        return ResponseEntity.ok(users);
+
+    }
 
 
 

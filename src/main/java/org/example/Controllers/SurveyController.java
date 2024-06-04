@@ -1,7 +1,7 @@
 package org.example.Controllers;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.example.Models.Survey;
+import org.example.Models.User;
 import org.example.service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +30,9 @@ public class SurveyController {
         return ResponseEntity.ok(surveys);
     }
 
+    //Crea o actualiza un usuario
     @PostMapping
-    public ResponseEntity<Survey> createSurvey(@RequestBody Survey survey) {
+    public ResponseEntity<Survey> CreateSurvey(@RequestBody Survey survey){
         Survey end = service.createSurvey(survey);
         return ResponseEntity.ok(end);
     }
