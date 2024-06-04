@@ -34,10 +34,9 @@ public class User {
     private String dni;
 
 
-
-    @ManyToOne(optional = true,fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties({"users","tasks"})
     private Apartment apartment;
 
     @OneToMany(mappedBy = "user")
@@ -47,14 +46,14 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String surname, String email, String password, String dni, int  apartmentId) {
+    public User(int id, String name, String surname, String email, String password, String dni, Apartment apartment) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.dni = dni;
-        this.apartment.setId(apartmentId);
+        this.apartment = apartment;
     }
 
     public int getId() {
@@ -105,19 +104,9 @@ public class User {
         this.dni = dni;
     }
 
-    public int getApartmentId() {
-        this.apartment.getId();
-        return apartment.getId();
-    }
 
-    public int setApartmentId(int apartmentId) {
-        this.apartment = new Apartment();
-        this.apartment.setId(apartmentId);
-        return apartment.getId();
-    }
 
-    /*
-
+    //@JsonIgnore
     public Apartment getApartment() {
         return apartment;
     }
@@ -125,7 +114,16 @@ public class User {
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
-    */
+
+
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     @Override
     public String toString() {
@@ -136,7 +134,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", dni='" + dni + '\'' +
-                ", apartmentId=" + apartment +
+                ", apartment=" + apartment +
                 '}';
     }
 }

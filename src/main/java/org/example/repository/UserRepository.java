@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    //devuelve paginado 10 usuarios por cada page
+    @Query(value = "SELECT * FROM users LIMIT 10 OFFSET ?1", nativeQuery = true)
+    List<User> findAllByPage(int page);
     //Devuelve los usuarios por apartamentoID
     @Query(value = "SELECT * FROM users u WHERE u.id_apartment = ?1", nativeQuery = true)
     List<User> getUsersByApartmentId(int id);
