@@ -1,8 +1,10 @@
 package org.example.service;
 
 
+import org.example.Models.Apartment;
 import org.example.Models.Article;
 import org.example.exception.RecordNotFoundException;
+import org.example.repository.ApartmentRepository;
 import org.example.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,13 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @Autowired
+    private ApartmentRepository apartmentRepository;
+
     public List<Article> getArticlesByApartmentId(int id) {
         return articleRepository.getArticlesByApartmentId(id);
     }
+
 
     public  Article createOrUpdateArticle(Article article) {
         Article result;
@@ -39,5 +45,6 @@ public class ArticleService {
         }
         return result;
     }
+
 
 }

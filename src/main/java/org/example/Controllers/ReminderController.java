@@ -25,6 +25,7 @@ public class ReminderController {
         return ResponseEntity.ok(reminders);
     }
 
+    /*
     @GetMapping("/{id}")
     public ResponseEntity<List<Reminder>> getRemindersByApartmentId(@PathVariable("id") int id) {
         List<Reminder> reminders = service.getRemindersByApartmentId(id);
@@ -35,6 +36,22 @@ public class ReminderController {
     public ResponseEntity <Reminder> createOrUpdateReminder(Reminder reminder) {
         Reminder end = service.createOrUpdateReminder(reminder);
         return ResponseEntity.ok(end);
+    }
+*/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Reminder>> getRemindersByApartmentId(@PathVariable("id") int id) {
+        List<Reminder> reminders = service.getRemindersByApartmentId(id);
+        return ResponseEntity.ok(reminders);
+    }
+
+
+
+
+    @PostMapping
+    public ResponseEntity<Reminder> createOrUpdateReminder(@RequestBody Reminder reminder) {
+        Reminder createdReminder = service.createOrUpdateReminder(reminder);
+        return ResponseEntity.ok(createdReminder);
     }
 
     @DeleteMapping("/{id}")

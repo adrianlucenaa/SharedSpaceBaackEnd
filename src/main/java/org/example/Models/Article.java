@@ -16,9 +16,10 @@ public class Article {
     @Column(name = "article")
     private String article;
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    //@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("article")
+    @JsonIgnoreProperties({"users","tasks","article"})
     private Apartment apartment;
 
 
@@ -48,7 +49,7 @@ public class Article {
     }
 
 
-    @JsonIgnore
+    //@JsonIgnore
     public Apartment getApartment() {
         return apartment;
     }
