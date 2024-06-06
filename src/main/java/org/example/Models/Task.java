@@ -25,49 +25,48 @@ public class Task {
     private boolean completed;
 
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("apartment")
+    //@JsonIgnoreProperties("apartment")
+    @JsonIgnoreProperties("tasks")
     private Apartment apartment;
 
 
-    @ManyToOne(optional = true,fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_user")
-    @JsonIgnoreProperties("user")
+    //@JsonIgnoreProperties("user")
+    @JsonIgnoreProperties("tasks")
     private User user;
 
     public Task() {
     }
 
-
-
-
-    public Task(String name, String description, boolean completed, int apartmentId, int userId) {
+    public Task(int id, String name, String description, boolean completed, Apartment apartment, User user) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.completed = completed;
-        this.apartment.setId(apartmentId);
-        this.user.setId(userId);
+        this.apartment = apartment;
+        this.user = user;
     }
 
-    public void setApartmentId(int apartmentId) {
-        this.apartment = new Apartment();
-        this.apartment.setId(apartmentId);
+    public Apartment getApartment() {
+
+        return apartment;
     }
 
-    public void setUserId(int userId) {
-        this.user = new User();
-        this.user.setId(userId);
+    public void setApartment(Apartment apartment) {
+
+        this.apartment = apartment;
     }
 
-    public int getApartmentId() {
-        this.apartment.getId();
-        return apartment.getId();
+    public User getUser() {
+
+        return user;
     }
 
-    public int getUserId() {
-        this.user.getId();
-        return user.getId();
+    public void setUser(User user) {
+        this.user = user;
     }
 
 
@@ -103,8 +102,6 @@ public class Task {
         this.completed = completed;
     }
 
-
-
     @Override
     public String toString() {
         return "Task{" +
@@ -112,17 +109,8 @@ public class Task {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", completed=" + completed +
-                ", apartmentId=" + apartment +
+                ", apartment=" + apartment +
                 ", user=" + user +
                 '}';
     }
-
-    public Task(String name, String description, boolean completed, Apartment apartment, User user) {
-        this.name = name;
-        this.description = description;
-        this.completed = completed;
-        this.apartment = apartment;
-        this.user = user;
-    }
-
 }
