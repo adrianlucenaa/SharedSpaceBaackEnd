@@ -1,10 +1,12 @@
 package org.example.Models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 
 @Entity
@@ -25,18 +27,21 @@ public class Reminder {
     @Column(name = "date")
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date date;
-    @ManyToOne(optional = true,fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("apartment")
+    @JsonIgnoreProperties("reminder")
     private Apartment apartment;
 
     public Reminder() {
     }
 
-    public Reminder(String description, Date date, int apartmentId) {
+
+
+    public Reminder(int id, String description, Date date, Apartment apartment) {
+        this.id = id;
         this.description = description;
         this.date = date;
-        this.apartment.setId(apartmentId);
+        this.apartment = apartment;
     }
 
 
@@ -64,24 +69,22 @@ public class Reminder {
         this.date = date;
     }
 
-    public int getApartmentId() {
-        this.apartment.getId();
-        return apartment.getId();
+    @JsonIgnore
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public int setApartmentId(int apartmentId) {
-        this.apartment = new Apartment();
-        this.apartment.setId(apartmentId);
-        return apartment.getId();
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     @Override
     public String toString() {
         return "Reminder{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                ", description=" + description + '\'' +
                 ", date=" + date +
-                ", apartmentId=" + apartment +
+                ", apartment=" + apartment +
                 '}';
     }
 }

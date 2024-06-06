@@ -1,5 +1,6 @@
 package org.example.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -15,22 +16,19 @@ public class Article {
     @Column(name = "article")
     private String article;
 
-    //private List<BuyList> buyList;
-
-
-    @ManyToOne(optional = true,fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("apartment")
+    @JsonIgnoreProperties("article")
     private Apartment apartment;
 
 
     public Article() {
     }
 
-    public Article(int id, String article, int apartmentId) {
+    public Article(int id, String article, Apartment apartment) {
         this.id = id;
         this.article = article;
-        this.apartment.setId(apartmentId);
+        this.apartment = apartment;
     }
 
     public int getId() {
@@ -48,7 +46,9 @@ public class Article {
     public void setArticle(String article) {
         this.article = article;
     }
-/*
+
+
+    @JsonIgnore
     public Apartment getApartment() {
         return apartment;
     }
@@ -56,23 +56,15 @@ public class Article {
     public void setApartment(Apartment apartment) {
         this.apartment = apartment;
     }
-*/
-    public void setApartmentId(int apartmentId) {
-        this.apartment = new Apartment();
-        this.apartment.setId(apartmentId);
-    }
 
-    public int getApartmentId() {
-        this.apartment.getId();
-        return apartment.getId();
-    }
+
 
     @Override
     public String toString() {
         return "Article{" +
-                "id=" + id +
+                "id='" + id +
                 ", article='" + article + '\'' +
-                ", apartmentId=" + apartment.getId() +
+                ", apartment=" + apartment +
                 '}';
     }
 }
