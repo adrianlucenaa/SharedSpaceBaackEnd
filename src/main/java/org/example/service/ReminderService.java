@@ -28,6 +28,7 @@ public class ReminderService {
                 Reminder fromDB = resultOptional.get();
                 fromDB.setDescription(reminder.getDescription());
                 fromDB.setDate(reminder.getDate());
+                //fromDB.setApartment(reminder.getApartment());
                 if (reminder.getApartment() != null) {
                     fromDB.setApartment(reminder.getApartment());
                 }

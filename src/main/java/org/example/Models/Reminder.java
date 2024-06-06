@@ -27,9 +27,10 @@ public class Reminder {
     @Column(name = "date")
     //@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date date;
-    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    //@ManyToOne(optional = true, fetch = FetchType.EAGER, cascade =  {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(optional = true, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_apartment")
-    @JsonIgnoreProperties("reminder")
+    @JsonIgnoreProperties({"users","tasks","reminder"})
     private Apartment apartment;
 
     public Reminder() {
@@ -69,7 +70,7 @@ public class Reminder {
         this.date = date;
     }
 
-    @JsonIgnore
+    //@JsonIgnore
     public Apartment getApartment() {
         return apartment;
     }
