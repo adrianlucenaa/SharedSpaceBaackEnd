@@ -39,8 +39,12 @@ public class TaskService {
                 fromDB.setName(task.getName());
                 fromDB.setDescription(task.getDescription());
                 fromDB.setCompleted(task.isCompleted());
-                fromDB.setApartmentId(task.getApartmentId());
-                fromDB.setUserId(task.getUserId());
+                if (task.getApartment() != null) {
+                    fromDB.setApartment(task.getApartment());
+                }
+                if (task.getUser() != null) {
+                    fromDB.setUser(task.getUser());
+                }
                 result = taskRepository.save(fromDB);
             } else {
                 throw new RecordNotFoundException("No task found with id: " + task.getId());

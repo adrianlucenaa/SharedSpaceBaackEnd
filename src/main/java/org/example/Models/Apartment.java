@@ -37,15 +37,19 @@ public class Apartment {
     private String img;
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<User> users;
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<Task> tasks;
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<Reminder> reminder;
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JsonIgnore
     private List<Article> article;
 
     public Apartment() {
