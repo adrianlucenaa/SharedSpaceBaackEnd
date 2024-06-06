@@ -27,6 +27,9 @@ public class ArticleService {
             if (articleOptional.isPresent()) {      //Update
                 Article fromDB = articleOptional.get();
                 fromDB.setArticle(article.getArticle());
+                if (article.getApartment() != null) {
+                    fromDB.setApartment(article.getApartment());
+                }
                 result = articleRepository.save(fromDB);
             } else {
                 throw new RecordNotFoundException("No article found with id: " + article.getId());

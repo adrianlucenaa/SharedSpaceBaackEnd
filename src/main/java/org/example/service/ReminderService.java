@@ -28,7 +28,9 @@ public class ReminderService {
                 Reminder fromDB = resultOptional.get();
                 fromDB.setDescription(reminder.getDescription());
                 fromDB.setDate(reminder.getDate());
-                fromDB.setApartmentId(reminder.getApartmentId());
+                if (reminder.getApartment() != null) {
+                    fromDB.setApartment(reminder.getApartment());
+                }
                 result = reminderRepository.save(fromDB);
             } else {
                 throw new RecordNotFoundException("No reminder found with id: " + reminder.getId());

@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/apartments")
+@CrossOrigin(origins = "http://localhost:8100")
 public class ApartmentController {
 
     @Autowired
@@ -31,6 +33,7 @@ public class ApartmentController {
     }
 
     //Crea o actualiza un apartamento
+
     @PostMapping
     public ResponseEntity<Apartment> createOrUpdateApartment(@RequestBody Apartment apartment){
         Apartment end = service.createOrUpdateApartment(apartment);

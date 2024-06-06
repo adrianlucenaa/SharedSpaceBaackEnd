@@ -1,11 +1,13 @@
 package org.example.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:8100")
 @Entity
 @Table(name = "apartment")
 public class Apartment {
@@ -41,7 +43,10 @@ public class Apartment {
     private List<Task> tasks;
 
     @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    private List<Survey> surveys;
+    private List<Reminder> reminder;
+
+    @OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    private List<Article> article;
 
     public Apartment() {
     }
@@ -121,14 +126,22 @@ public class Apartment {
         this.tasks = tasks;
     }
 
-
-    public List<Survey> getSurveys() {
-        return surveys;
+    public List<Reminder> getReminder() {
+        return reminder;
     }
 
 
-    public void setSurveys(List<Survey> surveys) {
-        this.surveys = surveys;
+    public void setReminder(List<Reminder> reminder) {
+        this.reminder = reminder;
+    }
+
+    //@JsonIgnore
+    public List<Article> getArticle(){
+        return article;
+    }
+
+    public void setArticle(List<Article> article){
+        this.article = article;
     }
 
     @Override
