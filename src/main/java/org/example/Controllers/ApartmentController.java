@@ -27,7 +27,7 @@ public class ApartmentController {
 
     //Devuelve todos los apartamentos por id
     @GetMapping("/{id}")
-    public ResponseEntity<Apartment> getUserById(@PathVariable("id") int id){
+    public ResponseEntity<Apartment> getApartmentById(@PathVariable("id") int id){
         Apartment apartment = service.getApartmentById(id);
         return ResponseEntity.ok(apartment);
     }
