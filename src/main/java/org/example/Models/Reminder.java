@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.sql.Date;
 import java.util.List;
 
 
+@CrossOrigin(origins = "http://localhost:8100")
 @Entity
 @Table(name = "reminder")
 public class Reminder {

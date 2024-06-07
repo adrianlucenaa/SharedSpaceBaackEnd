@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jdk.jfr.DataAmount;
 import lombok.Data;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:8100")
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "tasks"})

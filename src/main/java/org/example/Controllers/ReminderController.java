@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reminder")
+@CrossOrigin(origins = "http://localhost:8100")
 public class ReminderController {
 
 

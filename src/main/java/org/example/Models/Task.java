@@ -4,7 +4,9 @@ package org.example.Models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://localhost:8100")
 @Entity
 @Table(name = "tasks")
 public class Task {
